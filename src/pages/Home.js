@@ -5,87 +5,100 @@ function Home() {
     <div>
 
       {/* HERO */}
-      <div className="container-fluid bg-primary py-5 mb-5">
-        <div className="container py-5">
-          <div className="row">
-            <div className="col-lg-8 text-white">
-              <h1 className="display-4 mb-4">
-                Best Healthcare Solution In Your City
-              </h1>
+      <div className="hero-section d-flex align-items-center">
+        <div className="container d-flex align-items-center justify-content-between">
 
-              <p className="mb-4">
-                Book appointments with top doctors easily and quickly.
-              </p>
+          <div className="hero-text">
+            <h1>
+              Find the Best <span>Doctors</span><br />
+              In Your City
+            </h1>
 
-              <Link to="/book">
-                <button className="btn btn-light me-3">
-                  Book Appointment
-                </button>
+            <p>
+              Book appointments with top specialists instantly and effortlessly.
+            </p>
+
+            <div className="mt-4">
+              <Link to="/book" className="btn btn-light me-3 px-4 py-2">
+                Book Appointment
               </Link>
 
-              <Link to="/login">
-                <button className="btn btn-outline-light">
-                  Login
-                </button>
+              <Link to="/login" className="btn btn-outline-light px-4 py-2">
+                Login
               </Link>
             </div>
           </div>
+
+          <div className="hero-img-wrapper">
+            <img src="/img/team-1.jpg" alt="doctor" className="hero-img" />
+          </div>
+
         </div>
       </div>
 
       {/* ABOUT */}
-      <div className="container py-5">
-        <div className="row">
-          <div className="col-lg-6">
-            <img
-              src="/img/about.jpg"
-              alt="doctor"
-              className="img-fluid rounded"
-            />
-          </div>
+      <div className="about-section container mt-5 d-flex align-items-center justify-content-between">
 
-          <div className="col-lg-6">
-            <h2 className="text-primary mb-3">About Us</h2>
-            <h3>Best Medical Care For You</h3>
+        <img src="/img/blog-1.jpg" className="about-img" alt="about" />
 
-            <p>
-              We provide the best healthcare services with experienced doctors
-              and modern facilities.
-            </p>
+        <div className="about-text ms-4">
+          <h6 className="text-primary">ABOUT US</h6>
+          <h2>Best Medical Care For Yourself and Your Family</h2>
+
+          <p>
+            We provide top quality healthcare services with experienced doctors and modern facilities.
+          </p>
+
+          <div className="about-icons">
+            <div>👨‍⚕️ Qualified Doctors</div>
+            <div>🚑 Emergency Services</div>
+            <div>🧪 Accurate Testing</div>
+            <div>🚐 Free Ambulance</div>
           </div>
         </div>
+
       </div>
 
       {/* SERVICES */}
-      <div className="container py-5">
-        <h2 className="text-center text-primary mb-5">
-          Our Services
-        </h2>
+      <div className="services-section text-center mt-5">
 
-        <div className="row">
+        <h6 className="text-primary">SERVICES</h6>
+        <h1>Excellent Medical Services</h1>
 
-          <div className="col-md-4">
-            <div className="card text-center p-3">
-              <h4>Emergency Care</h4>
-              <p>24/7 emergency services available.</p>
-            </div>
+        <div className="container services-grid mt-4">
+
+          <div className="service-card">
+            <h5>Emergency Care</h5>
+            <p>Quick and reliable emergency services</p>
           </div>
 
-          <div className="col-md-4">
-            <div className="card text-center p-3">
-              <h4>Doctor Consultation</h4>
-              <p>Consult top doctors easily.</p>
-            </div>
+          <div className="service-card">
+            <h5>Operation & Surgery</h5>
+            <p>Advanced surgical procedures</p>
           </div>
 
-          <div className="col-md-4">
-            <div className="card text-center p-3">
-              <h4>Online Booking</h4>
-              <p>Book appointments in seconds.</p>
-            </div>
+          <div className="service-card">
+            <h5>Outdoor Checkup</h5>
+            <p>Routine health checkups</p>
+          </div>
+
+          <div className="service-card">
+            <h5>Ambulance Service</h5>
+            <p>24/7 ambulance availability</p>
+          </div>
+
+          <div className="service-card">
+            <h5>Medicine & Pharmacy</h5>
+            <p>All medicines available</p>
+          </div>
+
+          <div className="service-card">
+            <h5>Blood Testing</h5>
+            <p>Accurate diagnostic tests</p>
           </div>
 
         </div>
+
       </div>
 
     </div>

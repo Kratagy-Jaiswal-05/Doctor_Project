@@ -1,24 +1,51 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate();
+
   const handleRegister = (e) => {
     e.preventDefault();
-    alert("Registered Successfully");
+
+    // Validation
+    if (!name || !email || !password) {
+      alert("⚠️ Please fill all fields");
+      return;
+    }
+
+    // Save user in localStorage
+    const userData = {
+      name,
+      email,
+      password
+    };
+
+    localStorage.setItem("user", JSON.stringify(userData));
+
+    alert("✅ Registered Successfully!");
+
+    // Redirect to login
+    navigate("/login");
   };
 
   return (
-    <div style={{ minHeight: "100vh", background: "#f8f9fa" }} className="d-flex justify-content-center align-items-center">
-
-      <div className="card p-4 shadow-lg" style={{ width: "380px", borderRadius: "15px" }}>
-        
-        <h2 className="text-center text-primary mb-4">Create Account</h2>
+    <div
+      style={{ minHeight: "100vh", background: "#f8f9fa" }}
+      className="d-flex justify-content-center align-items-center"
+    >
+      <div
+        className="card p-4 shadow-lg"
+        style={{ width: "380px", borderRadius: "15px" }}
+      >
+        <h2 className="text-center text-primary mb-4">
+          Create Account
+        </h2>
 
         <form onSubmit={handleRegister}>
-
           <div className="mb-3">
             <label className="form-label">Full Name</label>
             <input
@@ -55,11 +82,8 @@ function Register() {
           <button className="btn btn-primary w-100">
             Register
           </button>
-
         </form>
-
       </div>
-
     </div>
   );
 }
