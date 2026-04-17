@@ -1,0 +1,15 @@
+[
+  {
+    "id": "1",
+    "doctor": "Dr. Amit Verma",
+    "doctorId": "73",
+    "city": "Bangalore",
+    "category": "Cardiologist",
+    "date": "2026-04-18",
+    "time": "09:30",
+    "status": "pending",
+    "userEmail": "kushjaiswal@gmail.com",
+    "userName": "kushjaiswal",
+    "createdAt": "2026-04-16T09:50:48.390Z"
+  }
+]

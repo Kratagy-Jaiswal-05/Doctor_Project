@@ -1,7 +1,10 @@
-import { useState } from "react";
-import doctors from "../data/doctors";
+import { useEffect, useMemo, useState } from "react";
+import fallbackDoctors from "../data/doctors";
+import { createAppointment } from "../services/appointmentsService";
+import { fetchDoctors } from "../services/doctorsService";
 
 function BookDoctor() {
+  const [doctors, setDoctors] = useState([]);
   const [city, setCity] = useState("");
   const [category, setCategory] = useState("");
   const [selectedDoctor, setSelectedDoctor] = useState("");
@@ -9,9 +12,27 @@ function BookDoctor() {
   const [time, setTime] = useState("");
 
   const isLoggedIn = localStorage.getItem("loggedIn");
+  const user = JSON.parse(localStorage.getItem("user"));
 
-  const cities = [...new Set(doctors.map(doc => doc.city))];
-  const categories = [...new Set(doctors.map(doc => doc.category))];
+  useEffect(() => {
+    let mounted = true;
+    fetchDoctors()
+      .then((list) => {
+        if (mounted && Array.isArray(list) && list.length) setDoctors(list);
+      })
+      .catch(() => {
+        if (mounted) setDoctors(fallbackDoctors);
+      });
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  const cities = useMemo(() => [...new Set(doctors.map((doc) => doc.city))], [doctors]);
+  const categories = useMemo(
+    () => [...new Set(doctors.map((doc) => doc.category))],
+    [doctors]
+  );
 
   const filteredDoctors = doctors.filter(
     (doc) => doc.city === city && doc.category === category
@@ -61,7 +82,7 @@ function BookDoctor() {
       .map((appt) => appt.time);
   };
 
-  const handleBooking = (e) => {
+  const handleBooking = async (e) => {
     e.preventDefault();
 
     if (!isLoggedIn) {
@@ -93,18 +114,42 @@ function BookDoctor() {
       return;
     }
 
-    const newAppointment = {
-      doctor: selectedDoctor,
-      city,
-      category,
-      date,
-      time
-    };
+    const selectedDoc = filteredDoctors.find((d) => d.name === selectedDoctor);
 
-    existing.push(newAppointment);
-    localStorage.setItem("appointments", JSON.stringify(existing));
+    try {
+      const created = await createAppointment({
+        doctor: selectedDoctor,
+        doctorId: selectedDoc?.id,
+        city,
+        category,
+        date,
+        time,
+        userEmail: user?.email || "guest@example.com",
+        userName: user?.name || "Guest",
+      });
 
-    alert("Appointment Booked Successfully");
+      const newAppointment = {
+        ...created,
+      };
+
+      existing.push(newAppointment);
+      localStorage.setItem("appointments", JSON.stringify(existing));
+      alert("Appointment Booked Successfully");
+    } catch (err) {
+      // Fallback to local-only behavior if API is down
+      const newAppointment = {
+        id: `local-${Date.now()}`,
+        doctor: selectedDoctor,
+        city,
+        category,
+        date,
+        time,
+        status: "pending",
+      };
+      existing.push(newAppointment);
+      localStorage.setItem("appointments", JSON.stringify(existing));
+      alert("Appointment Booked (offline mode)");
+    }
   };
 
   return (

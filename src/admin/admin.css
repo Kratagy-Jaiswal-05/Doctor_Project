@@ -1,0 +1,54 @@
+.admin-shell {
+  min-height: 100vh;
+  background: #f4f6f9;
+}
+
+.admin-sidebar {
+  width: 260px;
+  background: #111827;
+  color: #fff;
+}
+
+.admin-sidebar a {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+}
+
+.admin-sidebar a:hover {
+  color: #fff;
+}
+
+.admin-sidebar .brand {
+  font-weight: 800;
+  letter-spacing: 0.3px;
+}
+
+.admin-nav-link {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 10px;
+}
+
+.admin-nav-link.active,
+.admin-nav-link:hover {
+  background: rgba(255, 255, 255, 0.10);
+}
+
+.admin-content {
+  flex: 1;
+}
+
+.admin-topbar {
+  background: #ffffff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.stat-card {
+  border: 0;
+  border-radius: 16px;
+}
+
+.table thead th {
+  white-space: nowrap;
+}
+
